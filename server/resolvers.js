@@ -29,9 +29,9 @@ export const resolvers = {
 
   Subscription: {
     messageAdded: {
-      subscribe: (_root, { input }, context) => {
-        console.log('[subscribe contexct:', context )
-        pubSub.asyncIterator('MESSAGE_ADDED')
+      subscribe: (_root, _args, { userId }) => {
+        rejectIf(!userId)
+        return pubSub.asyncIterator('MESSAGE_ADDED')
       },
     },
   },
